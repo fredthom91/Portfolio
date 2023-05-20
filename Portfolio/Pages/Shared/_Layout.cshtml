@@ -4,53 +4,47 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Fredrik Thomasson</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Portfolio.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/custom-style.css">
-    <link rel="stylesheet" type="text/css" href="css/loaders.css" />
-    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+    
+	<link rel="stylesheet" href="https://kit.fontawesome.com/41c8b474e2.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/site.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
-		<nav class="navbar navbar-expand-md fixed-top top-nav">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html"><strong>My Portfolio</strong></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"><img src="img/icons/menu.png"></span>
-				</button>
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav m-auto text-sm-center text-md-center">
-						<li class="nav-item">
-							<a class="nav-link" href="#home">Home <span class="sr-only">(current)</span></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#services">About me</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#about">My Experience</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#price">Portfolio</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#testimonial">Testimonials</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#contact">Contact</a>
-						</li>
-					</ul>
-				</div>
-				<ul class="navbar-nav ml-auto search-box">
-					<li class="nav-item">
-						<a class="nav-link" href="#"><i class="fa fa-search text-white"></i></a>
-					</li>
-				</ul>
-			</div>
-		</nav>
+    <header>
+        <div class="mynavbar">
+
+            <div class="navbar-floatings">
+
+                <div class="navbar-icons"><a href="#aboutme">About</a></div>
+                <div class="navbar-icons"><a href="#experience">Experience</a></div>
+                <div class="navbar-icons"><a href="#portfolio">Portfolio</a></div>
+                <div class="navbar-icons"><a href="#testimonials">Testimonials</a></div>
+                <div class="navbar-icons"><a href="#contact">Contact</a></div>
+
+
+            </div>
+            <div class="navbar-floatings2">
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="#aboutme">About</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <!-- Use any element to open the sidenav -->
+                <span class="navbar-icons" onclick="openNav()"><i class="fa-solid fa-square-caret-up"></i></span>
+
+            </div>
+
+
+        </div>
+
     </header>
+    
     <div class="container">
         <main role="main">
             @RenderBody()
@@ -58,23 +52,26 @@
     </div>
 
 	<!-- footer Block -->
-	<div class="copy-footer bg-primary py-2">
-		<div class="container text-center text-light">
-			&copy; <a href="http://grafreez.com" target="_blank">Fredrik Thomasson</a> <span id="year"></span>. All rights reserved. Created with <i class="fa fa-heart"></i>
-		</div>
-	</div>
+    <footer class="footer-background">
+        <section id="footer" class="py-5">
+            <div class="container">
+                <div class="footer-icons">
+                    <a href="#" class="footer-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="footer-icon"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="footer-icon"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="copyright">
+                <h6>© 2023 Fredrik Thomasson</h6>
+                <i class="fa-solid fa-phone"></i><span> 073-033 08 55</span> | <i class="fa-solid fa-envelope"></i><span> <a class="footer-icon" style="text-decoration: none;" href="mailto:fredde.thomasson@gmail.com">fredde.thomasson@gmail.com</a></span>
+            </div>
+        </section>
+    </footer>
 
 
+    <button class="totop-arrow hidden"><i class="fa-solid fa-arrow-up"></i></button>
 
-	<!-- Javascript Files  -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script async deffer type="text/javascript" src="https://maps.google.com/maps/api/js?key= AIzaSyB52BfJHBtqiqYBn_D4ZUqujiWxAOiRyTc&callback=initMap"></script>
-	<script src="js/gmap-custom.js"></script>
-	<script src="js/core.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="js/script.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

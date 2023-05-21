@@ -328,9 +328,23 @@ html, body {
         box-sizing: border-box;
     }
 
+.cardboxes {
+    padding: 15px;
+    
+}
 
 
 
+.all-port-boxes {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.info-desc {
+    font-size: 20px;
+    margin-top: 10px;
+}
 
 
 .testimonialcontainer {
@@ -615,5 +629,11 @@ html, body {
         width: auto;
         border: 1px solid #f4ef53;
         box-sizing: border-box;
+    }
+    .all-port-boxes {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        margin: 10px;
     }
 }

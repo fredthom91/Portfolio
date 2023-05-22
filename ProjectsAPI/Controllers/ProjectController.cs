@@ -20,7 +20,7 @@ namespace ProjectsAPI.Controllers
 			{
 
 				Id = 2, Name = "HotelBookingApp", CreatedDate = "2020-01-01",
-				Description = "A console-application for a hotel, you can book and handle customers aswell as rooms etc."},
+				Description = "A console-application for a hotel, you can book and handle customers aswell as rooms etc. Feel free to check it out on GitHub and try it out for yourself! Enjoy."},
 
 			new Project()
 			{
@@ -29,7 +29,8 @@ namespace ProjectsAPI.Controllers
 				Description = "A E-commerce site for clothes."},
 			new Project()
 			{
-				Id = 3, Name = "Ad API", Description = "A rest-API for ads.", CreatedDate = "2020-01-01" }
+				Id = 4, Name = "Ad API", CreatedDate = "2020-01-01", 
+				Description = "A rest-API for Ads." }
 			};
 
 

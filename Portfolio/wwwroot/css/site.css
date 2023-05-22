@@ -12,6 +12,11 @@ html, body {
 }
 
 
+
+.weather-info, .weather{
+    display:none;
+}
+
 .totop-arrow {
     background-color: #333;
     color: #dad7d3;
@@ -78,6 +83,7 @@ html, body {
         text-align: center;
         padding: 8px;
         text-decoration: none;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     }
 
 
@@ -165,6 +171,7 @@ html, body {
     justify-content: center;
     align-items: center;
     padding: 10px;
+    font-size: 12px;
 }
 
 .headtext, .headtext-under, .headtext-under1, .headtext-under2, .name-text {
@@ -174,7 +181,7 @@ html, body {
 /*bodycss*/
 
 .intro-button {
-    margin-top: 25px;
+    margin-top: 0;
 }
 
 .intro-buttons {
@@ -330,14 +337,26 @@ html, body {
 
 .cardboxes {
     padding: 15px;
+    margin: 10px;
     
+}
+
+.box2-info:hover{
+    background-image: url(../img/bankpic.png);
+    background-size: cover;
+    background-position-x:center;
+}
+.box3-info:hover {
+    background-image: url(../img/fixxopic.png);
+    background-size:cover;
+    background-position-x: center;
 }
 
 
 
 .all-port-boxes {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-direction: column;
 }
 
@@ -517,6 +536,15 @@ html, body {
     margin-top: 20px;
 }
 
+.message {
+    
+    color: #aba619; 
+    border: 4px solid #111; 
+    font-weight: bold; 
+    background-color: #333; 
+    margin-top: 10px;
+}
+
 
 
 
@@ -533,6 +561,7 @@ html, body {
         justify-content: center;
         align-items: center;
         padding: 10px;
+        font-size: 15px;
     }
 
     .aboutme-box {
@@ -631,9 +660,26 @@ html, body {
         box-sizing: border-box;
     }
     .all-port-boxes {
-        display: flex;
-        justify-content: space-between;
+        
         flex-direction: row;
-        margin: 10px;
     }
+    .port-box4, .port-box3, .port-box1, .port-box2 {
+        width: 700px;
+    }
+    .weather-info {
+        display:block;
+        color: #f4ef53;
+        background-color: #333;
+        border-radius: 40%;
+        border: 1px solid #aba619;
+        text-align: center;
+        width: 250px;
+        margin-right: 150px;
+        margin-left: -250px;
+    }
+    .weather{
+        display:block;
+    }
+    
+    
 }

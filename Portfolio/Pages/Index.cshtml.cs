@@ -10,6 +10,11 @@ using System;
 using System.Text.Json;
 using Newtonsoft.Json;
 using System.Reflection.Metadata;
+using Portfolio.Services;
+using static Portfolio.Services.APIServices;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Portfolio.Pages
 {
@@ -17,33 +22,74 @@ namespace Portfolio.Pages
 	public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
+		private readonly HttpClient _httpClient;
+		private readonly WeatherApiClient _weatherApiClient;
 
-        public IndexModel(ILogger<IndexModel> logger)
-        {
-            _logger = logger;
+		public IndexModel(ILogger<IndexModel> logger, HttpClient httpClient, WeatherApiClient weatherApiClient)
+		{
+			_logger = logger;
+			_httpClient = httpClient;
+			_weatherApiClient = weatherApiClient;
+		}
+
+		public List<string> ViewProjectData { get; set; } = new List<string>();
+		public double Temperature { get; set; }
+		public double Humidity { get; set; }
+		public string? Description { get; set; }
+		public string WeatherDataJson { get; set; }
+		public async Task OnGet()
+		{
+
+			var getData = new APIServices();
+			var apiKey = getData.GetWeatherApiKey();
+
+
+
+			ViewProjectData = getData.ShowProjects();
+
+			ViewData["Name1"] = ViewProjectData[0];
+			ViewData["Date1"] = ViewProjectData[1];
+			ViewData["Info1"] = ViewProjectData[2];
+
+			ViewData["Name2"] = ViewProjectData[3];
+			ViewData["Date2"] = ViewProjectData[4];
+			ViewData["Info2"] = ViewProjectData[5];
+
+			ViewData["Name3"] = ViewProjectData[6];
+			ViewData["Date3"] = ViewProjectData[7];
+			ViewData["Info3"] = ViewProjectData[8];
+
+			ViewData["Name4"] = ViewProjectData[9];
+			ViewData["Date4"] = ViewProjectData[10];
+			ViewData["Info4"] = ViewProjectData[11];
+
+			await WeatherOnGet(apiKey);
+
+		}
+		public async Task<IActionResult> WeatherOnGet(string apiKey)
+		{
+			await GenerateWeatherData("Stockholm", apiKey);
+			var weatherJson = WeatherDataJson;
+
+			(Temperature, Humidity, Description) = _weatherApiClient.ExtractWeatherInfo(weatherJson);
+
+			ViewData["Temperature"] = Temperature;
+			ViewData["Humidity"] = Humidity;
+			ViewData["Description"] = Description;
+			ViewData["City"] = "Stockholm";
+
+			return Page();
 		}
 
 		
 
-		public void OnGet()
+		public async Task GenerateWeatherData(string city, string apiKey)
 		{
-			var data = GetFirstProject();
-
-			ViewData["Name"] = data.Result.Name;
-			ViewData["Date"] = data.Result.CreatedDate;
-			ViewData["Info"] = data.Result.Description;
+			WeatherDataJson = await _weatherApiClient.GetWeatherData(city, apiKey);
 		}
-		public async Task<Project?> GetFirstProject()
-		{
-			using var client = new HttpClient();
-			var responseOne = await client.GetAsync("https://fredrikportfolioapi.azurewebsites.net/api/Me/1");
 
-			var content = await responseOne.Content.ReadAsStringAsync();
 
-			var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-			var data = System.Text.Json.JsonSerializer.Deserialize<Project>(content, options);
-			return data;
-		}
+
 
 
 	}

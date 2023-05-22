@@ -1,12 +1,13 @@
-# Min Portfolio ![alt text](http://url/to/img.png)
+# Min Portfolio
+![alt text](https://github.com/fredthom91/Portfolio/blob/master/portf%C3%B6lj.jpg)
 
-## Detta är min web-baserad portfolio:
+## Detta är min web-baserade portfolio:
 1. Det finns en beskrivning om mig själv.
 2. Det finns en redovisning av mina kunskaper.
 3. Det finns en sektion som hämtar information från ett rest-API där mina skolprojekt finns.
 4. Det finns en sektion som visar mina referenser.
 5. Det finns ett kontakt formulär.
-6. Länk till Portfolion: [Gå till Portfolion](https://fredrikthomassonportfolio.azurewebsites.net/).
+6. Länk till Portfolion: [KLICKA HÄR](https://fredrikthomassonportfolio.azurewebsites.net/).
 
   Denna portfolio är skapad i .NET AspCore Razor Pages.
   API:n är ett .NET Rest-API som är skapat i samma solution.

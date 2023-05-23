@@ -412,7 +412,15 @@
 							<label class="sr-only" for="formGroupExampleInput2">Message</label>
 							<textarea class="form-control" placeholder="Enter your message here..." name="message" required rows="4" onfocus="this.placeholder=''" onblur="this.placeholder='Enter your message here...'"></textarea>
 						</div>
-						<input type="hidden" name="_next" value="https://localhost:7092/DeliveredMessage">
+						@if (System.Diagnostics.Debugger.IsAttached)
+						{
+							<input type="hidden" name="_next" value="https://localhost:7092/DeliveredMessage">
+						}
+						else
+						{
+							<input type="hidden" name="_next" value="https://fredrikthomassonportfolio.azurewebsites.net/DeliveredMessage">
+						}
+						
 						<div class="text-center">
 							<button id="send-button" class="send-button">Send</button>
 						</div>

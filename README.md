@@ -16,48 +16,28 @@
 
 ## Metoder och Principer.
 
-1. Metoder:
+1. Metoder
 
  _*Metoder*_        | _*Kort beskrivning*_           |
 | ------------- |:-------------:|
-| GenerateAllAccounts()| Genererar alla konton från databasen. |
-| GetAllAccountsFromSpecificCustomer(int custId)| Genererar alla konton från en specifik kund. |
-| GetTotalBalanceFromSpecificCustomer(int accId)| Hämtar det totala kapitalet från en specifik kunds konton. |
-| GetWhenAccountWasCreated(int accId)| Hämtar info om när ett specifikt konto vart skapat. |
-| GetAccountFrequency(int accId)| Hämta ett specifikt kontos frekvens/användning. |
-| GenerateTotalBalance()| Genererar det totala kapitalet. |
-| GenerateLoanID(int accId)| Genererar ett låne-id för ett specifikt konto. |
-| GetWhenLoanCreated(int loanId)| När lånet skapades. |
-| GetLoanAmount(int loanId)| Lånesumman. |
-| GetLoanDuration(int loanId)| Avbetalningsplan. |
-| GetLoanPayments(int loanId)| Samtliga Betalningar gjorda. |
-| GetLoanStatus(int loanId)| Lånets status. |
-| ShowMoreTransactions(int accId, int pageNo)| Visar mer transaktioner(+20st varje klick) |
-| NewDeposit(Account account, decimal newAmount)| Här körs en ny insättning. |
-| NewWithdraw(Account account, decimal newAmount)| Här körs ett nytt uttag. |
-| GetAccount(int accountId)| Hämta ett specifikt konto. |
-| GenerateCustomerProfile(int id, int acc, decimal bal, DateTime loanCreated, decimal loanAmount, int loanDuration, decimal loanPayments, string loanStatus, int loanID)||
-| GetCustomerDispositionsId(int custId)| Hämtar ett specifikt dispositions id från en specific kund. |
-| GetCustomerCardInfo(int dispoId)| Hämtar kortinformation från en specifik kund. |
-| GenerateCountryDetails(string input)| Genererar Landsinformation med dess kunder. |
-| ShowTopTenCustomersByCountry(string countryCode)| Visa 10 kunder med högst saldo per land. |
-| GetAllCustomers()| Hämtar alla kunder från databasen. |
-| ConvertedCustomerList(List<Customer> customer)| Konverterar en lista. |
-| CustomerList(string q, int pageNo)| En lista på kunder. |
-| SortListByChoice()| Sorterar information baserat på val. |
-| GenerateAllCustomers()| Genererar alla kunder. |
-| GetCustomerName(int id)| Hämta kundens namn baserat på id. |
-| ErrorCodes(Customer checkCustomer)| kollar så att informationen som lämnats är korrekt. |
-| UpdateErrorCodes()| == |
-| DeleteErrorCodes()| == |
-| GetCurrentCustomer()| Tar information vidare från kundprofilen. |
-| GenerateUserInfoAndRoles()| Genererar en lista med användar information. |
-| CheckTransactions()| Går igenom alla transaktioner för respektive land. |
-| CheckCountry()| Går igenom per land och varje transaktion samt sparar ner misstänksamma transaktioner till en textfil. |
+| GenerateWeatherData()| Genererar väder data från ett API. |
+| ShowProjects()| Hämtar data från ett API med project. |
+| GetProject(int id)| Tar data från från API med ett specifikt ID. |
+| GetWeatherApiKey()| Hämtar API-nyckeln. |
+| GetWeatherData()| Hämtar väder data från ett API. |
+| ExtractWeatherInfo()| Extraherar väder info från ett API. |
+| OnGet()| Körs när sidan laddas. |
+| WeatherOnGet()| Körs via OnGet() när sidan laddas. |
 
 
+2. Design Patterns
+  
+  _*Typ*_        | _*Beskrivning*_           |
+| ------------- |:-------------:|
+| Dependency Injection| Dependency Injection hjälper till att förbättra modularitet, testbarhet och underhållbarhet hos mjukvarusystem genom att främja lösa kopplingar och möjliggöra flexibel hantering av beroenden. Det används brett inom många ramverk och bibliotek, inklusive beroendeinjektionsbehållare, för att förenkla hanteringen av objektberoenden i komplexa applikationer. |
+| Repository Pattern| Repository Pattern är en design pattern som används för att abstrahera och separera datalagringen från resten av applikationslogiken. Det erbjuder en enhetlig och standardiserad gränssnitt för att interagera med datakällor, oavsett om det är en databas, filsystem eller externa tjänster. |
 
-2. Principer
+3. Principer
 
  _*Typ*_        | _*Beskrivning*_            
 | ------------- |:-------------:|

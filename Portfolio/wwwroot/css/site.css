@@ -9,8 +9,7 @@ html, body {
     background-image: url(../img/portfoliobg.jpg);
     background-size: cover;
     color: #aba619;
-    max-width: 350px;
-    align-content: center;
+    max-width: 360px;
 }
 
 
@@ -267,7 +266,7 @@ html, body {
     opacity: 75%;
     color: #f4ef53;
     box-sizing: border-box;
-    max-width: 150px;
+    max-width: 320px;
 }
 
 .infobox2 {
@@ -278,7 +277,7 @@ html, body {
     opacity: 75%;
     color: #f4ef53;
     box-sizing: border-box;
-    max-width: 150px;
+    max-width: 320px;
 }
 
 .undertextsinfo {
@@ -600,6 +599,12 @@ html, body {
     .infobox1, .infobox2{
         max-width: none;
     }
+    .undertextsinfo {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        max-width: auto;
+    }
 
     .box-background {
         margin-top: 40px;
@@ -722,7 +727,6 @@ html, body {
     }
     html, body {
         max-width: none;
-        align-content: normal;
     }
     
         

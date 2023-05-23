@@ -7,59 +7,42 @@ namespace Portfolio.Services
 {
     public class APIServices
     {
-		
-		
-		public List<string> ShowProjects()
+        private readonly HttpClient _httpClient;
+
+        public APIServices(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<List<string>> ShowProjects()
         {
             var dataList = new List<string>();
 
-            var projectOne = GetProjects(1);
+            for (int id = 1; id <= 4; id++)
+            {
+                var project = await GetProject(id);
 
-            dataList.Add(projectOne.Result.Name);
-            dataList.Add(projectOne.Result.CreatedDate);
-            dataList.Add(projectOne.Result.Description);
-
-            var projectTwo = GetProjects(2);
-
-            dataList.Add(projectTwo.Result.Name);
-            dataList.Add(projectTwo.Result.CreatedDate);
-            dataList.Add(projectTwo.Result.Description);
-
-            var projectThree = GetProjects(3);
-
-            dataList.Add(projectThree.Result.Name);
-            dataList.Add(projectThree.Result.CreatedDate);
-            dataList.Add(projectThree.Result.Description);
-
-            var projectFour = GetProjects(4);
-
-            dataList.Add(projectFour.Result.Name);
-            dataList.Add(projectFour.Result.CreatedDate);
-            dataList.Add(projectFour.Result.Description);
+                if (project != null)
+                {
+                    dataList.Add(project.Name);
+                    dataList.Add(project.CreatedDate);
+                    dataList.Add(project.Description);
+                }
+            }
 
             return dataList;
-
-        }
-        public async Task<Project?> GetProjects(int id)
-        {
-            using var client = new HttpClient();
-            var responseOne = await client.GetAsync($"https://fredrikportfolioapi.azurewebsites.net/api/Me/{id}");
-
-            var content = await responseOne.Content.ReadAsStringAsync();
-
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var data = System.Text.Json.JsonSerializer.Deserialize<Project>(content, options);
-            return data;
         }
 
-		public string GetWeatherApiKey()
+        private async Task<Project?> GetProject(int id)
         {
-			return "6ba62436dd00318990437058362d6a82";
-		}
+            var response = await _httpClient.GetFromJsonAsync<Project>($"https://fredrikportfolioapi.azurewebsites.net/api/Me/{id}");
 
+            return response;
+        }
 
-
-
-
-	}
+        public string GetWeatherApiKey()
+        {
+            return "6ba62436dd00318990437058362d6a82";
+        }
+    }
 }

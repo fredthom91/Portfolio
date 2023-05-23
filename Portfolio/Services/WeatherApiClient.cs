@@ -1,42 +1,65 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Text.Json;
 
 namespace Portfolio.Services
 {
-	public class WeatherApiClient
-	{
-		private readonly HttpClient _httpClient;
+    public class WeatherApiClient
+    {
+        private readonly HttpClient _httpClient;
 
-		public WeatherApiClient()
-		{
-			_httpClient = new HttpClient();
-		}
+        public WeatherApiClient(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
 
-		public async Task<string> GetWeatherData(string city, string apiKey)
-		{
-			string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
+        public async Task<string> GetWeatherData(string city, string apiKey)
+        {
+            string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
 
-			HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
+            HttpResponseMessage response = await _httpClient.GetAsync(apiUrl);
 
-			if (response.IsSuccessStatusCode)
-			{
-				string json = await response.Content.ReadAsStringAsync();
-				return json;
-			}
-			else
-			{
-				
-				throw new HttpRequestException($"API request failed with status code: {response.StatusCode}");
-			}
-		}
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                return json;
+            }
+            else
+            {
+                throw new HttpRequestException($"API request failed with status code: {response.StatusCode}");
+            }
+        }
 
-		public (double Temperature, double Humidity, string Description) ExtractWeatherInfo(string weatherJson)
-		{
-			JObject json = JObject.Parse(weatherJson);
-			double temperature = json["main"]["temp"].Value<double>() - 273.15;
-			double humidity = json["main"]["humidity"].Value<double>();
-			string description = json["weather"][0]["description"].Value<string>();
+        public (double Temp, double Humidity, string Description) ExtractWeatherInfo(string weatherJson)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-			return (temperature, humidity, description);
-		}
-	}
+            var weatherData = JsonSerializer.Deserialize<WeatherData>(weatherJson, options);
+
+            double temperature = weatherData.Main.Temp - 273.15;
+            double humidity = weatherData.Main.Humidity;
+            string description = weatherData.Weather[0].Description;
+
+            return (temperature, humidity, description);
+        }
+
+        private class WeatherData
+        {
+            public WeatherMain Main { get; set; }
+            public WeatherDescription[] Weather { get; set; }
+        }
+
+        private class WeatherMain
+        {
+            public double Temp { get; set; }
+            public double Humidity { get; set; }
+        }
+
+        private class WeatherDescription
+        {
+            public string Description { get; set; }
+        }
+    }
 }

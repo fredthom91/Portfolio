@@ -17,11 +17,41 @@
 		<h5 class="text-center weather" style="color: #aba619; margin-right: 150px; margin-left: -250px;">
 			Current Weather
 		</h5>
-		<div class="weather-info">
+		<div class="weather-info" style="padding: 20px;">
 			<p><span style="color: #aba619">City:</span> @ViewData["City"]</p>
-			<p><i class="fa-solid fa-temperature-three-quarters" style="color: #aba619"></i> @string.Format("{0:0}", ViewData["Temperature"])°C</p>
+			<p><i class="fa-solid fa-temperature-three-quarters" style="color: #aba619"></i>  @string.Format("{0:0}", ViewData["Temp"])°C</p>
 			<p><i class="fa-regular fa-droplet-percent" style="color: #aba619"></i>  @ViewData["Humidity"]%</p>
 			<p><span style="color: #aba619">Description:</span> @ViewData["Description"]</p>
+			<div>
+				@if (@ViewData["Description"]?.ToString().ToLower() == "clear sky")
+				{
+					<i class="fa-solid fa-sun" style="font-size: 60px;"></i>
+				}
+				else if (@ViewData["Description"]?.ToString().ToLower() == "few clouds" || @ViewData["Description"]?.ToString().ToLower() == "scattered clouds")
+				{
+					<i class="fa-solid fa-sun-cloud" style="font-size: 60px;"></i>
+				}
+				else if (@ViewData["Description"]?.ToString().ToLower() == "broken clouds")
+				{
+					<i class="fa-solid fa-clouds" style="font-size: 60px;"></i>
+				}
+				else if (@ViewData["Description"]?.ToString().ToLower() == "mist" || @ViewData["Description"]?.ToString().ToLower() == "fog")
+				{
+					<i class="fa-solid fa-cloud-fog" style="font-size: 60px;"></i>
+				}
+				else if (@ViewData["Description"]?.ToString().ToLower() == "light rain" || @ViewData["Description"]?.ToString().ToLower() == "moderate rain" || @ViewData["Description"]?.ToString().ToLower() == "heavy rain" || @ViewData["Description"]?.ToString().ToLower() == "shower rain")
+				{
+					<i class="fa-solid fa-cloud-rain" style="font-size: 60px;"></i>
+				}
+				else if (@ViewData["Description"]?.ToString().ToLower() == "thunderstorm")
+				{
+					<i class="fa-solid fa-cloud-bolt" style="font-size: 60px;"></i>
+				}
+				else if (@ViewData["Description"]?.ToString().ToLower() == "snow" || @ViewData["Description"]?.ToString().ToLower() == "light snow" || @ViewData["Description"]?.ToString().ToLower() == "heavy snow")
+				{
+					<i class="fa-solid fa-cloud-snow" style="font-size: 60px;"></i>
+				}
+			</div>
 		</div>
 	</div>
 

@@ -18,79 +18,57 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Portfolio.Pages
 {
-	[BindProperties]
-	public class IndexModel : PageModel
+    [BindProperties]
+    public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-		private readonly HttpClient _httpClient;
-		private readonly WeatherApiClient _weatherApiClient;
+        private readonly WeatherApiClient _weatherApiClient;
+        private readonly APIServices _apiServices;
 
-		public IndexModel(ILogger<IndexModel> logger, HttpClient httpClient, WeatherApiClient weatherApiClient)
-		{
-			_logger = logger;
-			_httpClient = httpClient;
-			_weatherApiClient = weatherApiClient;
-		}
+        public IndexModel(WeatherApiClient weatherApiClient, APIServices apiServices)
+        {
+            _weatherApiClient = weatherApiClient;
+            _apiServices = apiServices;
+        }
 
-		public List<string> ViewProjectData { get; set; } = new List<string>();
-		public double Temperature { get; set; }
-		public double Humidity { get; set; }
-		public string? Description { get; set; }
-		public string WeatherDataJson { get; set; }
-		public async Task OnGet()
-		{
+        public List<string> ViewProjectData { get; set; } = new List<string>();
+        public double Temp { get; set; }
+        public double Humidity { get; set; }
+        public string? Description { get; set; }
+        public string WeatherDataJson { get; set; }
 
-			var getData = new APIServices();
-			var apiKey = getData.GetWeatherApiKey();
+        public async Task OnGet()
+        {
+            var apiKey = _apiServices.GetWeatherApiKey();
+            ViewProjectData = await _apiServices.ShowProjects();
 
+            for (int i = 0; i < ViewProjectData.Count; i += 3)
+            {
+                ViewData[$"Name{i / 3 + 1}"] = ViewProjectData[i];
+                ViewData[$"Date{i / 3 + 1}"] = ViewProjectData[i + 1];
+                ViewData[$"Info{i / 3 + 1}"] = ViewProjectData[i + 2];
+            }
 
+            await WeatherOnGet(apiKey);
+        }
 
-			ViewProjectData = getData.ShowProjects();
+        public async Task<IActionResult> WeatherOnGet(string apiKey)
+        {
+            await GenerateWeatherData("Stockholm", apiKey);
+            var weatherJson = WeatherDataJson;
 
-			ViewData["Name1"] = ViewProjectData[0];
-			ViewData["Date1"] = ViewProjectData[1];
-			ViewData["Info1"] = ViewProjectData[2];
+            (Temp, Humidity, Description) = _weatherApiClient.ExtractWeatherInfo(weatherJson);
 
-			ViewData["Name2"] = ViewProjectData[3];
-			ViewData["Date2"] = ViewProjectData[4];
-			ViewData["Info2"] = ViewProjectData[5];
+            ViewData[nameof(Temp)] = Temp;
+            ViewData[nameof(Humidity)] = Humidity;
+            ViewData[nameof(Description)] = Description;
+            ViewData["City"] = "Stockholm";
 
-			ViewData["Name3"] = ViewProjectData[6];
-			ViewData["Date3"] = ViewProjectData[7];
-			ViewData["Info3"] = ViewProjectData[8];
+            return Page();
+        }
 
-			ViewData["Name4"] = ViewProjectData[9];
-			ViewData["Date4"] = ViewProjectData[10];
-			ViewData["Info4"] = ViewProjectData[11];
-
-			await WeatherOnGet(apiKey);
-
-		}
-		public async Task<IActionResult> WeatherOnGet(string apiKey)
-		{
-			await GenerateWeatherData("Stockholm", apiKey);
-			var weatherJson = WeatherDataJson;
-
-			(Temperature, Humidity, Description) = _weatherApiClient.ExtractWeatherInfo(weatherJson);
-
-			ViewData["Temperature"] = Temperature;
-			ViewData["Humidity"] = Humidity;
-			ViewData["Description"] = Description;
-			ViewData["City"] = "Stockholm";
-
-			return Page();
-		}
-
-		
-
-		public async Task GenerateWeatherData(string city, string apiKey)
-		{
-			WeatherDataJson = await _weatherApiClient.GetWeatherData(city, apiKey);
-		}
-
-
-
-
-
-	}
+        public async Task GenerateWeatherData(string city, string apiKey)
+        {
+            WeatherDataJson = await _weatherApiClient.GetWeatherData(city, apiKey);
+        }
+    }
 }

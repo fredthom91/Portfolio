@@ -5,16 +5,17 @@ using System.Text.Json;
 
 namespace Portfolio.Services
 {
-    public class APIServices
+    public class ProjectAPIServices
     {
         private readonly HttpClient _httpClient;
 
-        public APIServices(HttpClient httpClient)
+        public ProjectAPIServices(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<List<string>> ShowProjects()
+		public List<string> ViewProjectData { get; set; } = new List<string>();
+		public async Task<List<string>> ShowProjects()
         {
             var dataList = new List<string>();
 
@@ -40,9 +41,6 @@ namespace Portfolio.Services
             return response;
         }
 
-        public string GetWeatherApiKey()
-        {
-            return "6ba62436dd00318990437058362d6a82";
-        }
+        
     }
 }

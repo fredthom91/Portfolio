@@ -8,8 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddHttpClient();
-builder.Services.AddTransient<APIServices>();
-builder.Services.AddTransient<WeatherApiClient>();
+builder.Services.AddTransient<ProjectAPIServices>();
+builder.Services.AddTransient<WeatherAPIServices>();
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();

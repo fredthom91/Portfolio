@@ -3,16 +3,39 @@ using System.Text.Json;
 
 namespace Portfolio.Services
 {
-    public class WeatherApiClient
+    public class WeatherAPIServices
     {
         private readonly HttpClient _httpClient;
 
-        public WeatherApiClient(HttpClient httpClient)
+        public WeatherAPIServices(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<string> GetWeatherData(string city, string apiKey)
+		public double Temp { get; set; }
+		public double Humidity { get; set; }
+		public string? Description { get; set; }
+		public string WeatherDataJson { get; set; }
+
+		private class WeatherData
+		{
+			public WeatherMain Main { get; set; }
+			public WeatherDescription[] Weather { get; set; }
+		}
+
+		private class WeatherMain
+		{
+			public double Temp { get; set; }
+			public double Humidity { get; set; }
+		}
+
+		private class WeatherDescription
+		{
+			public string Description { get; set; }
+		}
+
+
+		public async Task<string> GetWeatherData(string city, string apiKey)
         {
             string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
 
@@ -44,22 +67,16 @@ namespace Portfolio.Services
 
             return (temperature, humidity, description);
         }
+		public string GetWeatherApiKey()
+		{
+			return "6ba62436dd00318990437058362d6a82";
+		}
 
-        private class WeatherData
-        {
-            public WeatherMain Main { get; set; }
-            public WeatherDescription[] Weather { get; set; }
-        }
+		public async Task<string> GenerateWeatherData(string city, string apiKey)
+		{
+			return await GetWeatherData(city, apiKey);
+		}
 
-        private class WeatherMain
-        {
-            public double Temp { get; set; }
-            public double Humidity { get; set; }
-        }
 
-        private class WeatherDescription
-        {
-            public string Description { get; set; }
-        }
-    }
+	}
 }

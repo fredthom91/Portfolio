@@ -11,7 +11,7 @@ using System.Text.Json;
 using Newtonsoft.Json;
 using System.Reflection.Metadata;
 using Portfolio.Services;
-using static Portfolio.Services.APIServices;
+using static Portfolio.Services.ProjectAPIServices;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -21,31 +21,25 @@ namespace Portfolio.Pages
     [BindProperties]
     public class IndexModel : PageModel
     {
-        private readonly WeatherApiClient _weatherApiClient;
-        private readonly APIServices _apiServices;
+        private readonly WeatherAPIServices _weatherApiClient;
+        private readonly ProjectAPIServices _apiServices;
 
-        public IndexModel(WeatherApiClient weatherApiClient, APIServices apiServices)
+        public IndexModel(WeatherAPIServices weatherApiClient, ProjectAPIServices apiServices)
         {
             _weatherApiClient = weatherApiClient;
             _apiServices = apiServices;
         }
 
-        public List<string> ViewProjectData { get; set; } = new List<string>();
-        public double Temp { get; set; }
-        public double Humidity { get; set; }
-        public string? Description { get; set; }
-        public string WeatherDataJson { get; set; }
-
         public async Task OnGet()
         {
-            var apiKey = _apiServices.GetWeatherApiKey();
-            ViewProjectData = await _apiServices.ShowProjects();
+            var apiKey = _weatherApiClient.GetWeatherApiKey();
+            _apiServices.ViewProjectData = await _apiServices.ShowProjects();
 
-            for (int i = 0; i < ViewProjectData.Count; i += 3)
+            for (int i = 0; i < _apiServices.ViewProjectData.Count; i += 3)
             {
-                ViewData[$"Name{i / 3 + 1}"] = ViewProjectData[i];
-                ViewData[$"Date{i / 3 + 1}"] = ViewProjectData[i + 1];
-                ViewData[$"Info{i / 3 + 1}"] = ViewProjectData[i + 2];
+                ViewData[$"Name{i / 3 + 1}"] = _apiServices.ViewProjectData[i];
+                ViewData[$"Date{i / 3 + 1}"] = _apiServices.ViewProjectData[i + 1];
+                ViewData[$"Info{i / 3 + 1}"] = _apiServices.ViewProjectData[i + 2];
             }
 
             await WeatherOnGet(apiKey);
@@ -53,22 +47,19 @@ namespace Portfolio.Pages
 
         public async Task<IActionResult> WeatherOnGet(string apiKey)
         {
-            await GenerateWeatherData("Stockholm", apiKey);
-            var weatherJson = WeatherDataJson;
+            _weatherApiClient.WeatherDataJson = await _weatherApiClient.GenerateWeatherData("Stockholm", apiKey);
+            var weatherJson = _weatherApiClient.WeatherDataJson;
 
-            (Temp, Humidity, Description) = _weatherApiClient.ExtractWeatherInfo(weatherJson);
+            (_weatherApiClient.Temp, _weatherApiClient.Humidity, _weatherApiClient.Description) = _weatherApiClient.ExtractWeatherInfo(weatherJson);
 
-            ViewData[nameof(Temp)] = Temp;
-            ViewData[nameof(Humidity)] = Humidity;
-            ViewData[nameof(Description)] = Description;
+            ViewData[nameof(_weatherApiClient.Temp)] = _weatherApiClient.Temp;
+            ViewData[nameof(_weatherApiClient.Humidity)] = _weatherApiClient.Humidity;
+            ViewData[nameof(_weatherApiClient.Description)] = _weatherApiClient.Description;
             ViewData["City"] = "Stockholm";
 
             return Page();
         }
 
-        public async Task GenerateWeatherData(string city, string apiKey)
-        {
-            WeatherDataJson = await _weatherApiClient.GetWeatherData(city, apiKey);
-        }
+        
     }
 }

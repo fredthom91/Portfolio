@@ -9,6 +9,8 @@ html, body {
     background-image: url(../img/portfoliobg.jpg);
     background-size: cover;
     color: #aba619;
+    max-width: 350px;
+    align-content: center;
 }
 
 
@@ -177,11 +179,18 @@ html, body {
 .headtext, .headtext-under, .headtext-under1, .headtext-under2, .name-text {
     color: #aba619;
 }
+.headtext{
+    font-size: 20px;
+}
+.headtext-under{
+    font-size: 12px;
+}
 
 /*bodycss*/
 
 .intro-button {
     margin-top: 0;
+    text-align: center;
 }
 
 .intro-buttons {
@@ -227,7 +236,9 @@ html, body {
     box-sizing: border-box;
 }
 
-
+.aboutme-section{
+    max-width: 350px;
+}
 .aboutme-header {
     color: #dad7d3;
     margin-bottom: 25px;
@@ -242,6 +253,10 @@ html, body {
     background-size: cover;
     opacity: 75%;
     padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    max-width: 350px;
+   
 }
 
 .infobox1 {
@@ -252,6 +267,7 @@ html, body {
     opacity: 75%;
     color: #f4ef53;
     box-sizing: border-box;
+    max-width: 150px;
 }
 
 .infobox2 {
@@ -262,11 +278,15 @@ html, body {
     opacity: 75%;
     color: #f4ef53;
     box-sizing: border-box;
+    max-width: 150px;
 }
 
 .undertextsinfo {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    max-width: contain;
+    
 }
 
 .experience-box {
@@ -534,7 +554,13 @@ html, body {
     color: #aba619;
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
+
+
 
 .message {
     
@@ -569,6 +595,10 @@ html, body {
         background-size: cover;
         opacity: 75%;
         padding: 50px;
+        max-width: none;
+    }
+    .infobox1, .infobox2{
+        max-width: none;
     }
 
     .box-background {
@@ -680,6 +710,22 @@ html, body {
     .weather{
         display:block;
     }
+    .aboutme-section {
+        max-width:none;
+    }
+    .headtext {
+        font-size: 40px;
+    }
+
+    .headtext-under {
+        font-size: 20px;
+    }
+    html, body {
+        max-width: none;
+        align-content: normal;
+    }
+    
+        
     
     
 }

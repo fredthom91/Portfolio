@@ -25,22 +25,42 @@
 			<div>
 				@if (@ViewData["Description"]?.ToString().ToLower() == "clear sky")
 				{
+					@if (DateTime.Now >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0))
+					{
+						<i class="fa-solid fa-moon" style="font-size: 60px;"></i>
+					}
 					<i class="fa-solid fa-sun" style="font-size: 60px;"></i>
 				}
 				else if (@ViewData["Description"]?.ToString().ToLower() == "few clouds" || @ViewData["Description"]?.ToString().ToLower() == "scattered clouds")
 				{
+					@if (DateTime.Now >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0))
+					{
+						<i class="fa-solid fa-cloud-moon" style="font-size: 60px;"></i>
+					}
 					<i class="fa-solid fa-sun-cloud" style="font-size: 60px;"></i>
 				}
 				else if (@ViewData["Description"]?.ToString().ToLower() == "broken clouds")
 				{
+					@if (DateTime.Now >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0))
+					{
+						<i class="fa-solid fa-cloud-moon" style="font-size: 60px;"></i>
+					}
 					<i class="fa-solid fa-clouds" style="font-size: 60px;"></i>
 				}
 				else if (@ViewData["Description"]?.ToString().ToLower() == "mist" || @ViewData["Description"]?.ToString().ToLower() == "fog")
 				{
+					@if (DateTime.Now >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0))
+					{
+						<i class="fa-solid fa-cloud-moon" style="font-size: 60px;"></i>
+					}
 					<i class="fa-solid fa-cloud-fog" style="font-size: 60px;"></i>
 				}
 				else if (@ViewData["Description"]?.ToString().ToLower() == "light rain" || @ViewData["Description"]?.ToString().ToLower() == "moderate rain" || @ViewData["Description"]?.ToString().ToLower() == "heavy rain" || @ViewData["Description"]?.ToString().ToLower() == "shower rain")
 				{
+					@if (DateTime.Now >= new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 20, 0, 0))
+					{
+						<i class="fa-solid fa-cloud-moon-rain" style="font-size: 60px;"></i>
+					}
 					<i class="fa-solid fa-cloud-rain" style="font-size: 60px;"></i>
 				}
 				else if (@ViewData["Description"]?.ToString().ToLower() == "thunderstorm")

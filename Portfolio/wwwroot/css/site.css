@@ -290,6 +290,11 @@ html, body {
 
 .experience-box {
     margin-top: 50px;
+    
+    
+}
+.exp-container{
+    max-width: 350px;
 }
 
 .exp-container-info {
@@ -297,10 +302,12 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .exp-both-boxes {
     display: flex;
+    justify-content: center;
     padding: 25px;
     background-color: #111;
     border: 2px solid #dad7d3;
@@ -313,11 +320,11 @@ html, body {
 }
 
 .exp-box1 {
-    margin-right: 70px;
+    margin-right: 0;
 }
 
 .exp-box2 {
-    margin-left: 70px;
+    margin-left: 0;
     text-align: right;
 }
 
@@ -727,6 +734,17 @@ html, body {
     }
     html, body {
         max-width: none;
+    }
+    .exp-container {
+        max-width: none;
+    }
+    .exp-box1 {
+        margin-right: 70px;
+    }
+
+    .exp-box2 {
+        margin-left: 70px;
+        text-align: right;
     }
     
         

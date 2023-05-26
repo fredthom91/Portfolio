@@ -19,7 +19,7 @@
 		</h5>
 		<div class="weather-info" style="padding: 20px;">
 			<p><span style="color: #aba619">City:</span> @ViewData["City"]</p>
-			<p><i class="fa-solid fa-clock" style="color: #aba619"></i>  @DateTime.Now.ToShortTimeString()</p>
+			<p><i class="fa-solid fa-clock" style="color: #aba619"></i>  @DateTime.Now.ToString("HH:mm")</p>
 			<p><i class="fa-solid fa-temperature-three-quarters" style="color: #aba619"></i>  @string.Format("{0:0}", ViewData["Temp"])°C</p>
 			<p><i class="fa-regular fa-droplet-percent" style="color: #aba619"></i>  @ViewData["Humidity"]%</p>
 			<p><span style="color: #aba619">Description:</span> @ViewData["Description"]</p>

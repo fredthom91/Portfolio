@@ -31,4 +31,5 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+//Program Running
 app.Run();

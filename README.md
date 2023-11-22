@@ -8,7 +8,7 @@
 4. Det finns en sektion som hämtar information från ett API med vädret just-nu i stockholm. 
 5. Det finns en sektion som visar mina referenser.
 6. Det finns ett kontakt formulär.
-7. Länk till Portfolion: [KLICKA HÄR](https://fredrikthomassonportfolio.azurewebsites.net/).
+7. Länk till Portfolion: [KLICKA HÄR](https://portfoliofredrik.azurewebsites.net/).
 
   Denna portfolio är skapad i .NET AspCore Razor Pages.
   API:n är ett .NET Rest-API som är skapat i samma solution.

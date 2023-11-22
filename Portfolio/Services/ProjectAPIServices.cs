@@ -36,7 +36,7 @@ namespace Portfolio.Services
 
         private async Task<Project?> GetProject(int id)
         {
-            var response = await _httpClient.GetFromJsonAsync<Project>($"https://fredrikportfolioapi.azurewebsites.net/api/Me/{id}");
+            var response = await _httpClient.GetFromJsonAsync<Project>($"https://portfoliofredrikapi.azurewebsites.net/api/Me/{id}");
 
             return response;
         }
